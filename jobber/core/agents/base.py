@@ -1,3 +1,4 @@
+import os
 import json
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -22,7 +23,7 @@ class BaseAgent:
         self.messages = [{"role": "system", "content": system_prompt}]
         self.tools_list = []
         self.executable_functions_list = {}
-        self.llm_config = {"model": "gpt-4o-mini"}
+        self.llm_config = {"model": os.environ["MODEL_NAME"]}
         if tools:
             self._initialize_tools(tools)
             self.llm_config.update({"tools": self.tools_list, "tool_choice": "auto"})
